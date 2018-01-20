@@ -39,5 +39,10 @@ private:
 
 	// Return an OUT parameter
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& OutLookDirection) const;
-	
+
+	UPROPERTY(EditAnywhere)
+		float LineTraceRange = 1000000.0f;
+
+	// Returns true if ray line trace hits something in the specified channel (ECC_Visibility)
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 };
