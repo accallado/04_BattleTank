@@ -29,8 +29,6 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
-	//UE_LOG(LogTemp, Warning, TEXT("AimTowardsCrosshair()"));
-
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
@@ -44,10 +42,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))  // Has "side-effect": is going to linetrace
 	{
-
-		UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
-		// TODO Tell controlled tank to aim at this point
-
+		GetControlledTank()->AimAt(HitLocation);
 	}
 
 
@@ -62,7 +57,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) con
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenLocation = FVector2D((float)ViewportSizeX*CrossHairXLocation, (float)ViewportSizeY*CrossHairYLocation);
-	UE_LOG(LogTemp, Warning, TEXT("Aim screen location: %s"), *ScreenLocation.ToString());
 
 	// "De-project" the screen position of the crosshair to a world direction
 	FVector OutLookDirection;
